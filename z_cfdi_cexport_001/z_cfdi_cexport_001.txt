@@ -1,0 +1,89 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_CFDI_CEXPORT_001
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  z_cfdi_cexport_001.
+
+CONSTANTS: rbselected TYPE c LENGTH 1 VALUE 'X'.
+DATA: p_txt       TYPE c LENGTH 100,
+      gv_viewname TYPE tabname.
+
+INCLUDE z_cfdi_cexport_001_top.
+INCLUDE z_cfdi_cexport_001_f01.
+
+END-OF-SELECTION.
+
+  IF rb1 = rbselected.
+*Catalogo País
+    gv_viewname = 'ZCFDICPAIS'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb2 = rbselected.
+*Codigo Postal
+    gv_viewname = 'ZCFDICCP'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb3 = rbselected.
+*Clave Moneda
+    gv_viewname = 'ZCMONEDA'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb4 = rbselected.
+*Clave de Pedimento
+    gv_viewname = 'ZCFDICCPEDIME'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb5 = rbselected.
+*Tipo de Operación
+    gv_viewname = 'ZCFDICTOPERAC'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb6 = rbselected.
+*Unidad de Medida
+    gv_viewname = 'ZCFDICUMEDIDA'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb7 = rbselected.
+*Grupo de Cuentas
+    gv_viewname = 'ZCFDICGPOCTAS'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb8 = rbselected.
+*Metodo de Pago
+    gv_viewname = 'ZCFDI_MPAGO'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb9 = rbselected.
+*Catalogos de Estado
+    gv_viewname = 'ZCFDICESTADO'.
+    PERFORM call_view_m USING gv_viewname.
+*Alta de Cliente
+  ELSEIF rb10 = rbselected.
+    CALL TRANSACTION 'Z_CFDI_CEXPORT_002'.
+*Alta de Sociedades
+  ELSEIF rb11 = rbselected.
+    CALL TRANSACTION 'Z_CFDI_CEXPORT_003'.
+  ELSEIF rb12 = rbselected.
+*Catalogo Localidad
+    gv_viewname = 'ZCFDICLOCALIDAD'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb13 = rbselected.
+*Catalogo Municipio
+    gv_viewname = 'ZCFDICMUNICIPIO'.
+    PERFORM call_view_m USING gv_viewname.
+  ELSEIF rb14 = rbselected.
+*Condición
+    gv_viewname = 'ZCONDICIONC'.
+    PERFORM call_view_m USING gv_viewname.
+*Catálogo de Unidades de Medida para concepto
+  ELSEIF rb16 = rbselected.
+    gv_viewname = 'ZCFDICUMEDIDADET'.
+    PERFORM call_view_m USING gv_viewname.
+*Catálogo de Unidades de Medida para concepto
+  ELSEIF rb17 = rbselected.
+    gv_viewname = 'ZCFDINCREDITO'.
+    PERFORM call_view_m USING gv_viewname.
+*Catálogo de colonias
+  ELSEIF rb18 = rbselected.
+    gv_viewname = 'ZCFDICCOLONIAS'.
+    PERFORM call_view_m USING gv_viewname.
+  ENDIF.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.4.3 - E.G.Mellodew. 1998-2021. Sap Release 701
